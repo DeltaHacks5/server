@@ -72,33 +72,53 @@ app.get('/', function (req, res) {
 			 });
 });
 
-app.get('/', function (req, res) {
+app.put('/', function (req, res) {
 
-	console.log("HTTP Get Request");
-	var userReference = db.ref("/Park/");
+	console.log("HTTP Put Request");
 
-	//Attach an asynchronous callback to read the data
-	userReference.on("value",
-			  function(snapshot) {
-					console.log(snapshot.val());
-					res.json(snapshot.val());
-					userReference.off("value");
-					},
-			  function (errorObject) {
-					console.log("The read failed: " + errorObject.code);
-					res.send("The read failed: " + errorObject.code);
-			 });
+  var amenity = req.body.Amenity;
+	var count = req.body.Count;
+	var member = req.body.Member;
+	var name = req.body.Name;
+  var park = req.body.Park;
+  var time = req.bogy.Time;
+
+	var referencePath = '/Group/';
+	var userReference = firebase.database().ref(referencePath);
+	userReference.set({Amenity: amenity, Count: count, Member: member,
+  Name: name, Park: park, Time: time},
+				 function(error) {
+					if (error) {
+						res.send("Data could not be saved." + error);
+					}
+					else {
+						res.send("Data saved successfully.");
+					}
+			});
 });
 
+//Update existing instance
+app.post('/', function (req, res) {
 
-/* Express */
-const app1 = express()
-app1.get("*", (request, response) => {
-  response.send("Hello from Express on Firebase!")
-})
+	console.log("HTTP POST Request");
 
-const api1 = functions.https.onRequest(app1)
+  var amenity = req.body.Amenity;
+	var count = req.body.Count;
+	var member = req.body.Member;
+	var name = req.body.Name;
+  var park = req.body.Park;
+  var time = req.bogy.Time;
 
-module.exports = {
-  api1
-}
+	var referencePath = '/Group/';
+	var userReference = firebase.database().ref(referencePath);
+	userReference.update({Amenity: amenity, Count: count, Member: member,
+  Name: name, Park: park, Time: time},
+				 function(error) {
+					if (error) {
+						res.send("Data could not be updated." + error);
+					}
+					else {
+						res.send("Data updated successfully.");
+					}
+			    });
+});
