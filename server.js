@@ -70,14 +70,15 @@ app.put('/', function (req, res) {
 
   var amenity = req.body.Amenity;
 	var count = req.body.Count;
+  var id = req.body.Id;
 	var member = req.body.Member;
 	var name = req.body.Name;
   var park = req.body.Park;
   var time = req.bogy.Time;
 
-	var referencePath = '/Group/';
+	var referencePath = '/Group/' + name;
 	var userReference = firebase.database().ref(referencePath);
-	userReference.set({Amenity: amenity, Count: count, Member: member,
+	userReference.set({Amenity: amenity, Count: count, Id: id, Member: member,
   Name: name, Park: park, Time: time},
 				 function(error) {
 					if (error) {
