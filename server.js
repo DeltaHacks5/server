@@ -69,10 +69,10 @@ app.put('/', function (req, res) {
 	console.log("HTTP Put Request");
 
   var amenity = req.body.Amenity;
-	var count = req.body.Count;
+  var count = req.body.Count;
   var id = req.body.Id;
-	var member = req.body.Member;
-	var name = req.body.Name;
+  var member = req.body.Member;
+  var name = req.body.Name;
   var park = req.body.Park;
   var time = req.bogy.Time;
 
@@ -98,16 +98,15 @@ app.post('/', function (req, res) {
 	console.log("HTTP POST Request");
 
   var amenity = req.body.Amenity;
-	var count = req.body.Count;
-	var member = req.body.Member;
-	var name = req.body.Name;
+  var count = req.body.Count;
+  var member = req.body.Member;
+  var name = req.body.Name;
   var park = req.body.Park;
   var time = req.bogy.Time;
 
-	var referencePath = '/Group/';
-	var userReference = firebase.database().ref(referencePath);
-	userReference.update({Amenity: amenity, Count: count, Member: member,
-  Name: name, Park: park, Time: time},
+  var referencePath = '/Group/';
+  var userReference = firebase.database().ref(referencePath);
+  userReference.update({Amenity: amenity, Count: count, Member: member, Name: name, Park: park, Time: time},
 				 function(error) {
 					if (error) {
 						res.send("Data could not be updated." + error);
@@ -118,7 +117,7 @@ app.post('/', function (req, res) {
 			    });
 });
 
-var server = app.listen(8080, function () {
+var server = app.listen(80, function () {
 
    var host = server.address().address;
    var port = server.address().port;
